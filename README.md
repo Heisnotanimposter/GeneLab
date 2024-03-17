@@ -1,4 +1,4 @@
-(https://github.com/Heisnotanimposter/GeneLab/assets/97718938/cf8b7353-6377-4f82-9460-04d887ef4e82)
+
 
 # GeneLab
 
@@ -17,4 +17,5 @@ Versatility: The inclusion of both letters and numbers in the ID provides a high
 Practical Implications
 The design of the PDB ID system reflects a balance between simplicity for ease of use and the complexity needed to ensure uniqueness and scalability. As the database continues to grow, the PDB ID remains a crucial tool for the organization, retrieval, and reference of structural data in the scientific community.
 
-![Uploading Violin-plot-on-the-PDB-dataset-Visualization-of-F1-value-of-UFold-versus-other-11-RNA.png…]()
+![Violin-plot-on-the-PDB-dataset-Visualization-of-F1-value-of-UFold-versus-other-11-RNA](https://github.com/Heisnotanimposter/GeneLab/assets/97718938/110c05bf-8e17-4cf9-9d40-0617b4e5ff72)
+
