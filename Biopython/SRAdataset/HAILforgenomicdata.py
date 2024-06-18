@@ -1,13 +1,15 @@
-
-
 import hail as hl
 from datasets import load_dataset
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import os
 
 def initialize_hail():
-    hl.init(log='/dataset/PDB/hail1.log')
+    # Use a valid directory for the log file
+    log_dir = '/tmp/hail_log'  # Change this to a directory you have write access to
+    os.makedirs(log_dir, exist_ok=True)
+    hl.init(log=os.path.join(log_dir, 'hail.log'))
 
 def load_hf_dataset(dataset_name):
     # Load dataset from Hugging Face Hub
@@ -76,3 +78,5 @@ def preprocess():
     # Visualize the data
     visualize_data(data)
 
+# Directly call the preprocess function
+preprocess()
