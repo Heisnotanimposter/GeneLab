@@ -1,28 +1,78 @@
-pip install hail
+
+
 import hail as hl
-hl.init()
-# Load VCF files
-mt = hl.import_vcf('data/sample.vcf.bgz')
+from datasets import load_dataset
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
-# Load gVCF files
-gvcfs = hl.import_gvcfs(['sample1.g.vcf.gz', 'sample2.g.vcf.gz'], reference_genome='GRCh38')
+def initialize_hail():
+    hl.init(log='/dataset/PDB/hail1.log')
 
-# Basic filtering examples
-filtered_mt = mt.filter_rows(mt.info.AF < 0.01)  # Filter variants by allele frequency
-filtered_mt = filtered_mt.filter_entries(mt.GQ > 20)  # Filter entries by genotype quality
+def load_hf_dataset(dataset_name):
+    # Load dataset from Hugging Face Hub
+    dataset = load_dataset(dataset_name)
+    return dataset
 
-# Sample and variant QC
-mt = hl.sample_qc(mt)
-mt = hl.variant_qc(mt)
+def load_data():
+    # Load data using the datasets library from Hugging Face Hub
+    dataset = load_hf_dataset('jglaser/pdb_protein_ligand_complexes')
 
-# Add phenotype data
-pheno = hl.import_table('data/phenotypes.tsv', impute=True, key='Sample')
-mt = mt.annotate_cols(pheno=pheno[mt.s])
+    # Convert dataset to pandas dataframe
+    train = pd.DataFrame(dataset['train'])
+    test = pd.DataFrame(dataset['test'])
 
-# Perform GWAS
-gwas = hl.linear_regression_rows(y=mt.pheno.CaffeineConsumption, x=mt.GT.n_alt_alleles())
-gwas = gwas.select('locus', 'alleles', 'p_value', 'beta', 'standard_error')
-gwas.show()
+    # For this example, let's use only the train set
+    return train
 
-# Export GWAS results to a TSV file
-gwas.export('output/gwas_results.tsv')
+def process_protein_data(df):
+    # Extract necessary data (assuming dataframe structure provided)
+    # Example: Extracting receptor features
+    receptor_features = df['receptor_features']
+    ligand_smiles = df['smiles']
+
+    # Convert receptor features to a format suitable for Hail (if needed)
+    # For simplicity, we'll skip detailed conversion steps
+
+    return receptor_features, ligand_smiles
+
+def visualize_data(df):
+    # Visualize the distribution of receptor features and ligand SMILES
+    # Example visualizations (modify according to actual data structure)
+    
+    # Plot ligand SMILES lengths
+    df['smiles_length'] = df['smiles'].apply(len)
+    plt.figure(figsize=(10, 6))
+    sns.histplot(df['smiles_length'], bins=50, kde=True)
+    plt.title('Distribution of Ligand SMILES Lengths')
+    plt.xlabel('SMILES Length')
+    plt.ylabel('Frequency')
+    plt.show()
+
+    # Plot a few receptor feature distributions if they are numerical
+    if 'receptor_features' in df.columns:
+        receptor_features_df = pd.json_normalize(df['receptor_features'])
+        plt.figure(figsize=(10, 6))
+        sns.histplot(receptor_features_df.iloc[:, 0], bins=50, kde=True)
+        plt.title('Distribution of First Receptor Feature')
+        plt.xlabel('Feature Value')
+        plt.ylabel('Frequency')
+        plt.show()
+
+def preprocess():
+    initialize_hail()
+    data = load_data()
+
+    receptor_features, ligand_smiles = process_protein_data(data)
+
+    # Here you would typically convert the processed data into a Hail MatrixTable or Table
+    # For the sake of the example, we'll assume receptor_features can be directly converted into a Hail Table
+    ht = hl.Table.from_pandas(data)
+
+    # Additional preprocessing steps if needed
+    # Save the preprocessed data to a Hail file format
+    ht.write('output/preprocessed.ht', overwrite=True)
+
+    # Visualize the data
+    visualize_data(data)
+
