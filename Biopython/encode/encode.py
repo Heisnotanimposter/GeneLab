@@ -1,5 +1,5 @@
 # Step 1: Import necessary libraries (Step 3)
-!pip install biopython
+#!pip install biopython
 import torch
 import torch.nn as nn
 import torch.optim as optim
