@@ -1,0 +1,68 @@
+# GeneLab Configuration File
+
+# Data paths
+data:
+  base_path: "./data"
+  sequences_path: "./data/sequences"
+  models_path: "./models"
+  output_path: "./output"
+  logs_path: "./logs"
+
+# NCBI Entrez settings
+entrez:
+  email: "your.email@example.com"
+  api_key: ""  # Optional: Add your NCBI API key here
+  max_retries: 3
+  delay: 1.0  # seconds between requests
+
+# Model training settings
+training:
+  epochs: 50
+  batch_size: 32
+  validation_split: 0.2
+  test_split: 0.2
+  random_seed: 42
+  early_stopping:
+    enabled: true
+    patience: 10
+    monitor: "val_loss"
+
+# Genetic mutation settings
+mutation:
+  base_rate: 0.01
+  elitism_rate: 0.1
+  crossover_rate: 0.7
+  population_size: 100
+
+# Reinforcement Learning settings
+rl:
+  total_timesteps: 10000
+  learning_rate: 0.0003
+  gamma: 0.99
+  batch_size: 64
+  n_steps: 2048
+
+# Sequence analysis settings
+sequence:
+  kmer_size: 6
+  ngram_range: [4, 4]
+  encoding: "one-hot"  # Options: "one-hot", "integer", "kmer"
+
+# Visualization settings
+visualization:
+  figure_size: [10, 8]
+  dpi: 300
+  style: "seaborn-v0_8"
+  save_format: "png"
+
+# Logging settings
+logging:
+  level: "INFO"  # Options: DEBUG, INFO, WARNING, ERROR, CRITICAL
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "genelab.log"
+
+# Hardware settings
+hardware:
+  use_gpu: true
+  gpu_memory_growth: true
+  num_threads: 4
