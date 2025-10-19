@@ -1,0 +1,43 @@
+# Core dependencies
+numpy>=1.24.0
+pandas>=2.0.0
+scikit-learn>=1.3.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# BioPython and bioinformatics
+biopython>=1.81
+
+# Deep Learning
+tensorflow>=2.13.0
+torch>=2.0.0
+
+# Reinforcement Learning
+stable-baselines3>=2.0.0
+gymnasium>=0.28.0
+
+# Data processing
+pyspark>=3.4.0
+
+# Visualization
+plotly>=5.15.0
+
+# Web interface
+streamlit>=1.25.0
+
+# Utilities
+python-dotenv>=1.0.0
+pyyaml>=6.0
+tqdm>=4.65.0
+joblib>=1.3.0
+
+# Development dependencies
+pytest>=7.4.0
+pytest-cov>=4.1.0
+black>=23.7.0
+flake8>=6.1.0
+mypy>=1.5.0
+sphinx>=7.2.0
+
+# Optional: For better performance
+numba>=0.57.0
