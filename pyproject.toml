@@ -1,0 +1,82 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "genelab"
+version = "2.0.0"
+description = "A comprehensive bioinformatics toolkit for gene mutation analysis, sequence processing, and machine learning"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [
+    {name = "GeneLab Team", email = "contact@genelab.dev"}
+]
+keywords = ["bioinformatics", "genomics", "machine-learning", "gene-mutation", "sequence-analysis"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+
+dependencies = [
+    "numpy>=1.24.0",
+    "pandas>=2.0.0",
+    "scikit-learn>=1.3.0",
+    "matplotlib>=3.7.0",
+    "seaborn>=0.12.0",
+    "biopython>=1.81",
+    "tensorflow>=2.13.0",
+    "torch>=2.0.0",
+    "stable-baselines3>=2.0.0",
+    "gymnasium>=0.28.0",
+    "pyspark>=3.4.0",
+    "plotly>=5.15.0",
+    "streamlit>=1.25.0",
+    "python-dotenv>=1.0.0",
+    "pyyaml>=6.0",
+    "tqdm>=4.65.0",
+    "joblib>=1.3.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "black>=23.7.0",
+    "flake8>=6.1.0",
+    "mypy>=1.5.0",
+    "sphinx>=7.2.0",
+]
+docs = [
+    "sphinx>=7.2.0",
+    "sphinx-rtd-theme>=1.3.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Heisnotanimposter/GeneLab"
+Documentation = "https://genelab.readthedocs.io"
+Repository = "https://github.com/Heisnotanimposter/GeneLab"
+Issues = "https://github.com/Heisnotanimposter/GeneLab/issues"
+
+[tool.black]
+line-length = 100
+target-version = ['py39', 'py310', 'py311']
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+addopts = "--cov=genelab --cov-report=html --cov-report=term-missing"
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
